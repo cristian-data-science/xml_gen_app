@@ -39,6 +39,13 @@ def delete_file_if_exists(file_name):
     else:
         return f"Archivo '{file_name}' no existe."
 
+def get_binary_file_downloader_html(file_path, file_label):
+    with open(file_path, "rb") as file:
+        bytes_data = file.read()
+        b64 = base64.b64encode(bytes_data).decode()
+        href = f'<a href="data:application/octet-stream;base64,{b64}" download="{file_path}">Descargar {file_label}</a>'
+        return href
+
 
 
 def main():
@@ -247,16 +254,18 @@ def gen_xml(col2, page_name):
             # comprimimr todos los xml creados en un zip
             st.write('Comprimiendo XMLs...')
             
+            st.write('Comprimiendo XMLs...')
             with zipfile.ZipFile('xmls.zip', 'w') as zip:
                 for file in os.listdir():
                     if file.endswith('.xml'):
                         zip.write(file)
-            # crear boton para descargar zip
+
+            # Crear botón para descargar zip
             st.write('Descargar XMLs')
             st.markdown(get_binary_file_downloader_html('xmls.zip', 'XMLs'), unsafe_allow_html=True)
-            # borrar archivos xml
-            message_xmls = delete_file_if_exists('xmls.zip')
 
+            # Borrar archivos xml
+            message_xmls = delete_file_if_exists('xmls.zip')
         
 
 
