@@ -256,8 +256,7 @@ def gen_xml(col2, page_name):
                     if file.endswith('.xml'):
                         zip.write(file)
 
-            # Crear botón para descargar zip
-            st.write('Descargar XMLs')
+            
             st.markdown(get_binary_file_downloader_html('xmls.zip', 'XMLs'), unsafe_allow_html=True)
 
             # Borrar archivos xml
