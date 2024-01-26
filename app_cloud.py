@@ -214,7 +214,8 @@ def config_xml(col2, page_name):
 
             # Actualizar el DataFrame en el estado de la sesión
             st.session_state.df_editable = edited_df
-
+            if 'df_lineasxml' in st.session_state:
+                del st.session_state.df_lineasxml
             # Botón para guardar los cambios en un archivo
             if st.button('Guardar Cambios'):
                 st.session_state.df_editable.to_excel("lineaseditadas.xlsx")
