@@ -9,7 +9,7 @@ from streamlit_lottie import st_lottie
 from streamlit.components.v1 import html
 from datetime import datetime
 import os
-from sql_func import obtener_lineas_xml
+from sql_func import *
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -239,7 +239,7 @@ def gen_xml(col2, page_name):
                 nombre_archivo = f"{row['TipoDTE']}-{row['Folio']}.xml"
                 xml_tree.write(nombre_archivo, encoding='utf-8', xml_declaration=True)
                 st.success(f"Archivo '{nombre_archivo}' creado.")
-                
+
 
         except FileNotFoundError:
             # Si el archivo no se encuentra, muestra un mensaje informativo
