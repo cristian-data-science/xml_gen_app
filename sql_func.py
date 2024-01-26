@@ -16,7 +16,7 @@ def obtener_lineas_xml(fecha_desde, fecha_final):
     cursor = conn.cursor(as_dict=True)
 
     query = """
-    SELECT * FROM XML_INVOICE WHERE FcheMIS BETWEEN %s AND %s
+    SELECT DISTINCT * FROM XML_INVOICE WHERE FcheMIS BETWEEN %s AND %s
     """
     cursor.execute(query, (fecha_desde, fecha_final))
     df_xml_invoice = pd.DataFrame(cursor.fetchall())
