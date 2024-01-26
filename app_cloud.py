@@ -230,8 +230,8 @@ def gen_xml(col2, page_name):
         ui_home(col2, "Generación de XML en base a folios", lot1)
 
         try:
-            df_lineasxml = pd.read_excel("lineaseditadas.xlsx")
-            st.write(df_lineasxml)
+            df_lineaseditadas = pd.read_excel("lineaseditadas.xlsx")
+            st.write(df_lineaseditadas)
 
             if 'comenzar_pressed' not in st.session_state:
                 st.session_state.comenzar_pressed = False
@@ -247,7 +247,7 @@ def gen_xml(col2, page_name):
 
 
                 # Iterar sobre cada fila del DataFrame y crear un archivo XML
-                for index, row in df_lineasxml.iterrows():
+                for index, row in df_lineaseditadas.iterrows():
                     xml_tree = crear_xml(row)
                     # Usar TipoDTE y Folio para el nombre del archivo
                     nombre_archivo = f"{row['TipoDTE']}-{row['Folio']}.xml"
@@ -267,7 +267,11 @@ def gen_xml(col2, page_name):
             
                 st.markdown(get_binary_file_downloader_html('xmls.zip', 'XMLs'), unsafe_allow_html=True)
 
-                # Borrar archivos xml
+                # Borrar archivos TODOS LOS ARCHIVOS XML DEL DIRECTORIO
+                for file in os.listdir():
+                    if file.endswith('.xml'):
+                        os.remove(file)
+
                 message_xmls = delete_file_if_exists('xmls.zip')
                 st.session_state.comenzar_pressed = False  # Reinicia el estado después de la creación
 
