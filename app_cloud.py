@@ -232,23 +232,20 @@ def gen_xml(col2, page_name):
         ui_home(col2, "Generación de XML en base a folios", lot1)
 
         try:
-            # Intenta leer el archivo Excel
             df_lineasxml = pd.read_excel("lineaseditadas.xlsx")
-            # Si se carga correctamente, muestra el DataFrame
             st.write(df_lineasxml)
 
-            # Inicializa el estado de la sesión para el botón si no existe
             if 'comenzar_pressed' not in st.session_state:
                 st.session_state.comenzar_pressed = False
 
-            # Muestra el botón y actualiza el estado de la sesión cuando se presiona
-            if st.button('Comenzar Creación de XMLs'):
+            comenzar_button = st.button('Comenzar Creación de XMLs')
+
+            if comenzar_button:
                 st.session_state.comenzar_pressed = True
 
-            # Comprueba si el botón ha sido presionado explícitamente
             if st.session_state.comenzar_pressed:
                 st.write('La creación de XMLs ha comenzado...')
-                # Aquí va el código que se ejecutará tras presionar el botón
+                        # Aquí va el código que se ejecutará tras presionar el botón
 
 
                 # Iterar sobre cada fila del DataFrame y crear un archivo XML
@@ -274,6 +271,8 @@ def gen_xml(col2, page_name):
 
                 # Borrar archivos xml
                 message_xmls = delete_file_if_exists('xmls.zip')
+                st.session_state.comenzar_pressed = False  # Reinicia el estado después de la creación
+
         
 
 
