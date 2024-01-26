@@ -250,11 +250,7 @@ def gen_xml(col2, page_name):
             
             # success message contando cuantos xml se crearon con la funcion crear_xml
             st.success(f"Se han creado {len(df_lineasxml)} archivos XML.")
-
-            # comprimimr todos los xml creados en un zip
-            st.write('Comprimiendo XMLs...')
             
-            st.write('Comprimiendo XMLs...')
             with zipfile.ZipFile('xmls.zip', 'w') as zip:
                 for file in os.listdir():
                     if file.endswith('.xml'):
