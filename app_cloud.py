@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-st.set_page_config(page_title="App Template", layout="wide")
+st.set_page_config(page_title="App Template", layout="wide", initial_sidebar_state="expanded")
 
 def load_lottieurl(url: str):
     r = requests.get(url)
@@ -41,6 +41,7 @@ def delete_file_if_exists(file_name):
 def main():
     col1 = st.sidebar
     col2, col3 = st.columns((4, 1))
+
 
     with col1:      
         #st_lottie(lot2, key="lol",height=180, width=280)      
