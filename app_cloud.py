@@ -210,9 +210,7 @@ def config_xml(col2, page_name):
                 st.session_state.df_editable.to_excel("lineaseditadas.xlsx")
                 st.success("Cambios guardados")
 
-            """comenzar_button = st.button('Comenzar creación de XMLs')
-            if comenzar_button:
-                st.write('La creación de XMLs ha comenzado...')"""
+
 
 
 
@@ -229,6 +227,9 @@ def gen_xml(col2, page_name):
             df_lineasxml = pd.read_excel("lineaseditadas.xlsx")
             # Si se carga correctamente, muestra el DataFrame
             st.write(df_lineasxml)
+            comenzar_button = st.button('Comenzar creación de XMLs')
+            if comenzar_button:
+                st.write('La creación de XMLs ha comenzado...')
         except FileNotFoundError:
             # Si el archivo no se encuentra, muestra un mensaje informativo
             st.info("Aún no se han cargado folios a la app.")
