@@ -247,9 +247,12 @@ def gen_xml(col2, page_name):
                 # Usar TipoDTE y Folio para el nombre del archivo
                 nombre_archivo = f"{row['TipoDTE']}-{row['Folio']}.xml"
                 xml_tree.write(nombre_archivo, encoding='utf-8', xml_declaration=True)
-            
-            # success message contando cuantos xml se crearon con la funcion crear_xml
-            st.success(f"Se han creado {len(df_lineasxml)} archivos XML.")
+
+            # Contar cuántos archivos XML se han creado realmente
+            num_xml_creados = len([nombre for nombre in os.listdir() if nombre.endswith('.xml')])
+
+            # Mensaje de éxito con el conteo actualizado
+            st.success(f"Se han creado {num_xml_creados} archivos XML.")
             
             with zipfile.ZipFile('xmls.zip', 'w') as zip:
                 for file in os.listdir():
