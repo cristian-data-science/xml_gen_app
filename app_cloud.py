@@ -237,7 +237,17 @@ def gen_xml(col2, page_name):
             # Si se carga correctamente, muestra el DataFrame
             st.write(df_lineasxml)
             comenzar_button = st.button('Comenzar creación de XMLs')
+            if 'comenzar_pressed' not in st.session_state:
+                st.session_state.comenzar_pressed = False
+
+            comenzar_button = st.button('Comenzar Creación de XMLs')
+
             if comenzar_button:
+                # Actualiza el estado para reflejar que el botón ha sido presionado
+                st.session_state.comenzar_pressed = True
+
+            # Verifica si el botón ha sido presionado explícitamente
+            if st.session_state.comenzar_pressed:
                 st.write('La creación de XMLs ha comenzado...')
 
             # Iterar sobre cada fila del DataFrame y crear un archivo XML
