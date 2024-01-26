@@ -270,10 +270,10 @@ def gen_xml(col2, page_name):
                             zip.write(file)
 
             
-            st.markdown(get_binary_file_downloader_html('xmls.zip', 'XMLs'), unsafe_allow_html=True)
+                st.markdown(get_binary_file_downloader_html('xmls.zip', 'XMLs'), unsafe_allow_html=True)
 
-            # Borrar archivos xml
-            message_xmls = delete_file_if_exists('xmls.zip')
+                # Borrar archivos xml
+                message_xmls = delete_file_if_exists('xmls.zip')
         
 
 
