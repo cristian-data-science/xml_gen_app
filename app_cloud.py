@@ -236,37 +236,38 @@ def gen_xml(col2, page_name):
             df_lineasxml = pd.read_excel("lineaseditadas.xlsx")
             # Si se carga correctamente, muestra el DataFrame
             st.write(df_lineasxml)
-            comenzar_button = st.button('Comenzar creación de XMLs')
+
+            # Inicializa el estado de la sesión para el botón si no existe
             if 'comenzar_pressed' not in st.session_state:
                 st.session_state.comenzar_pressed = False
 
-            comenzar_button = st.button('Comenzar Creación de XMLs')
-
-            if comenzar_button:
-                # Actualiza el estado para reflejar que el botón ha sido presionado
+            # Muestra el botón y actualiza el estado de la sesión cuando se presiona
+            if st.button('Comenzar Creación de XMLs'):
                 st.session_state.comenzar_pressed = True
 
-            # Verifica si el botón ha sido presionado explícitamente
+            # Comprueba si el botón ha sido presionado explícitamente
             if st.session_state.comenzar_pressed:
                 st.write('La creación de XMLs ha comenzado...')
+                # Aquí va el código que se ejecutará tras presionar el botón
 
-            # Iterar sobre cada fila del DataFrame y crear un archivo XML
-            for index, row in df_lineasxml.iterrows():
-                xml_tree = crear_xml(row)
-                # Usar TipoDTE y Folio para el nombre del archivo
-                nombre_archivo = f"{row['TipoDTE']}-{row['Folio']}.xml"
-                xml_tree.write(nombre_archivo, encoding='utf-8', xml_declaration=True)
 
-            # Contar cuántos archivos XML se han creado realmente
-            num_xml_creados = len([nombre for nombre in os.listdir() if nombre.endswith('.xml')])
+                # Iterar sobre cada fila del DataFrame y crear un archivo XML
+                for index, row in df_lineasxml.iterrows():
+                    xml_tree = crear_xml(row)
+                    # Usar TipoDTE y Folio para el nombre del archivo
+                    nombre_archivo = f"{row['TipoDTE']}-{row['Folio']}.xml"
+                    xml_tree.write(nombre_archivo, encoding='utf-8', xml_declaration=True)
 
-            # Mensaje de éxito con el conteo actualizado
-            st.success(f"Se han creado {num_xml_creados} archivos XML.")
-            
-            with zipfile.ZipFile('xmls.zip', 'w') as zip:
-                for file in os.listdir():
-                    if file.endswith('.xml'):
-                        zip.write(file)
+                # Contar cuántos archivos XML se han creado realmente
+                num_xml_creados = len([nombre for nombre in os.listdir() if nombre.endswith('.xml')])
+
+                # Mensaje de éxito con el conteo actualizado
+                st.success(f"Se han creado {num_xml_creados} archivos XML.")
+                
+                with zipfile.ZipFile('xmls.zip', 'w') as zip:
+                    for file in os.listdir():
+                        if file.endswith('.xml'):
+                            zip.write(file)
 
             
             st.markdown(get_binary_file_downloader_html('xmls.zip', 'XMLs'), unsafe_allow_html=True)
