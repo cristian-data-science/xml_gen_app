@@ -5,10 +5,10 @@ import pandas as pd
 load_dotenv()  
 
 def obtener_lineas_xml(fecha_desde, fecha_final):
-    server = os.getenv('SERVER')
-    username = os.getenv('USER')
-    password = os.getenv('PASSWORD')
-    database = os.getenv('DATABASE')
+    server = st.secrets["SERVER"]
+    username = st.secrets["USER"]
+    password = st.secrets["PASSWORD"]
+    database = st.secrets["DATABASE"]
 
     conn = pymssql.connect(server, username, password, database)
     cursor = conn.cursor(as_dict=True)
