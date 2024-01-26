@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import pymssql
 import requests
+import base64
+import zipfile
 import xml.etree.ElementTree as ET
 from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_option_menu import option_menu
@@ -244,7 +246,7 @@ def gen_xml(col2, page_name):
 
             # comprimimr todos los xml creados en un zip
             st.write('Comprimiendo XMLs...')
-            import zipfile
+            
             with zipfile.ZipFile('xmls.zip', 'w') as zip:
                 for file in os.listdir():
                     if file.endswith('.xml'):
@@ -254,7 +256,7 @@ def gen_xml(col2, page_name):
             st.markdown(get_binary_file_downloader_html('xmls.zip', 'XMLs'), unsafe_allow_html=True)
             # borrar archivos xml
             message_xmls = delete_file_if_exists('xmls.zip')
-            
+
         
 
 
