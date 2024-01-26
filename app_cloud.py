@@ -241,17 +241,16 @@ def gen_xml(col2, page_name):
             
             # success message contando cuantos xml se crearon con la funcion crear_xml
             st.success(f"Se han creado {len(df_lineasxml)} archivos XML.")
-            # boton de descarga de zip
+            # boton de descarga de zip con todos los xml creados en streamlit
             if st.button('Descargar ZIP'):
-                st.write('Descargando ZIP...')
-                # Crear un archivo ZIP con todos los archivos XML
-                os.system("zip xmls.zip *.xml")
-                # Descargar el archivo ZIP
-                with open("xmls.zip", "rb") as f:
-                    bytes = f.read()
-                    b64 = base64.b64encode(bytes).decode()
-                    href = f'<a href="data:file/zip;base64,{b64}" download="xmls.zip">Descargar ZIP</a>'
-                    st.markdown(href, unsafe_allow_html=True)
+                st.download_button(
+                    label="Descargar ZIP",
+                    data="lineaseditadas.xlsx",
+                    file_name="lineaseditadas.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                )
+            
+            
 
 
 
