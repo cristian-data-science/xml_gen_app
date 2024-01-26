@@ -209,14 +209,18 @@ def config_xml(col2, page_name):
             if 'df_editable' not in st.session_state:
                 st.session_state.df_editable = df_lineasxml.copy()
 
-            # Mostrar el DataFrame editable
-            edited_df = st.data_editor(st.session_state.df_editable, num_rows="dynamic")
+            # Mostrar el DataFrame editable (asumiendo que usas un componente personalizado)
+            if 'edited_df' not in st.session_state:
+                st.session_state.edited_df = st.session_state.df_editable.copy()
 
-            # Actualizar el DataFrame en el estado de la sesión
-            st.session_state.df_editable = edited_df
+            # Tu componente personalizado para editar DataFrames aquí
+            # Por ejemplo: edited_df = st.custom_data_editor(st.session_state.edited_df)
+            # Asegúrate de que este componente no actualice automáticamente st.session_state
 
             # Botón para guardar los cambios en un archivo
             if st.button('Guardar Cambios'):
+                # Aquí actualizas el estado de la sesión con los cambios
+                st.session_state.df_editable = st.session_state.edited_df.copy()
                 st.session_state.df_editable.to_excel("lineaseditadas.xlsx")
                 st.success("Cambios guardados")
 
