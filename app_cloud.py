@@ -205,18 +205,14 @@ def config_xml(col2, page_name):
 
             ###
 
-            # Inicializar el estado de la sesión si es necesario
-            if 'df_editable' not in st.session_state:
-                st.session_state.df_editable = df_lineasxml.copy()
+            # Actualizar el estado de la sesión
+            st.session_state.df_editable = df_lineasxml
 
-            # Mostrar el DataFrame editable
+            # Mostrar y editar el DataFrame
             edited_df = st.data_editor(st.session_state.df_editable, num_rows="dynamic")
-
-            # Actualizar el DataFrame en el estado de la sesión
             st.session_state.df_editable = edited_df
-            if 'df_lineasxml' in st.session_state:
-                del st.session_state.df_lineasxml
-            # Botón para guardar los cambios en un archivo
+
+            # Botón para guardar los cambios
             if st.button('Guardar Cambios'):
                 st.session_state.df_editable.to_excel("lineaseditadas.xlsx")
                 st.success("Cambios guardados")
