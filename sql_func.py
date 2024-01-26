@@ -71,7 +71,6 @@ def crear_xml(row):
     detalles_data = {field: str(row[field]).split(';') for field in detalles_fields}
     num_detalles = len(detalles_data['NroLinDet'])
 
-    import xml.etree.ElementTree as ET
 
     for i in range(num_detalles):
         detalle = ET.SubElement(documento, "Detalle")
