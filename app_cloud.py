@@ -238,7 +238,21 @@ def gen_xml(col2, page_name):
                 # Usar TipoDTE y Folio para el nombre del archivo
                 nombre_archivo = f"{row['TipoDTE']}-{row['Folio']}.xml"
                 xml_tree.write(nombre_archivo, encoding='utf-8', xml_declaration=True)
-                st.success(f"Archivo '{nombre_archivo}' creado.")
+            
+            # success message contando cuantos xml se crearon con la funcion crear_xml
+            st.success(f"Se han creado {len(df_lineasxml)} archivos XML.")
+            # boton de descarga de zip
+            if st.button('Descargar ZIP'):
+                st.write('Descargando ZIP...')
+                # Crear un archivo ZIP con todos los archivos XML
+                os.system("zip xmls.zip *.xml")
+                # Descargar el archivo ZIP
+                with open("xmls.zip", "rb") as f:
+                    bytes = f.read()
+                    b64 = base64.b64encode(bytes).decode()
+                    href = f'<a href="data:file/zip;base64,{b64}" download="xmls.zip">Descargar ZIP</a>'
+                    st.markdown(href, unsafe_allow_html=True)
+
 
 
         except FileNotFoundError:
