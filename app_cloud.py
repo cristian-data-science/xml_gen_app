@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import pymssql
 import requests
+import xml.etree.ElementTree as ET
 from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
@@ -230,6 +231,16 @@ def gen_xml(col2, page_name):
             comenzar_button = st.button('Comenzar creación de XMLs')
             if comenzar_button:
                 st.write('La creación de XMLs ha comenzado...')
+
+            # Iterar sobre cada fila del DataFrame y crear un archivo XML
+            for index, row in df_lineasxml.iterrows():
+                xml_tree = crear_xml(row)
+                # Usar TipoDTE y Folio para el nombre del archivo
+                nombre_archivo = f"{row['TipoDTE']}-{row['Folio']}.xml"
+                xml_tree.write(nombre_archivo, encoding='utf-8', xml_declaration=True)
+                st.success(f"Archivo '{nombre_archivo}' creado.")
+                
+
         except FileNotFoundError:
             # Si el archivo no se encuentra, muestra un mensaje informativo
             st.info("Aún no se han cargado folios a la app.")
