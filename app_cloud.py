@@ -204,6 +204,7 @@ def config_xml(col2, page_name):
             df_lineasxml.set_index('Datos_OK', inplace=True)
 
             ###
+
             # Inicializar el estado de la sesión si es necesario
             if 'df_editable' not in st.session_state:
                 st.session_state.df_editable = df_lineasxml.copy()
