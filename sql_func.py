@@ -73,15 +73,15 @@ def crear_xml(row):
 
     for i in range(num_detalles):
         detalle = ET.SubElement(documento, "Detalle")
-        ET.SubElement(detalle, "NroLinDet").text = detalles_data['NroLinDet'][i]
+        ET.SubElement(detalle, "NroLinDet").text = str(abs(int(detalles_data['NroLinDet'][i])))
         cdg_item = ET.SubElement(detalle, "CdgItem")
-        ET.SubElement(cdg_item, "TpoCodigo").text = detalles_data['TpoCodigo'][i]
-        ET.SubElement(cdg_item, "VlrCodigo").text = detalles_data['VlrCodigo'][i]
-        ET.SubElement(detalle, "NmbItem").text = detalles_data['NmbItem'][i]
-        ET.SubElement(detalle, "QtyItem").text = detalles_data['QtyItem'][i]
-        ET.SubElement(detalle, "UnmdItem").text = detalles_data['UnmdItem'][i]
-        ET.SubElement(detalle, "PrcItem").text = detalles_data['PrcItem'][i]
-        ET.SubElement(detalle, "MontoItem").text = detalles_data['MontoItem'][i]
+        ET.SubElement(cdg_item, "TpoCodigo").text = str(detalles_data['TpoCodigo'][i])
+        ET.SubElement(cdg_item, "VlrCodigo").text = str(detalles_data['VlrCodigo'][i])
+        ET.SubElement(detalle, "NmbItem").text = str(detalles_data['NmbItem'][i])
+        ET.SubElement(detalle, "QtyItem").text = str(abs(int(detalles_data['QtyItem'][i])))
+        ET.SubElement(detalle, "UnmdItem").text = str(detalles_data['UnmdItem'][i])
+        ET.SubElement(detalle, "PrcItem").text = str(abs(int(detalles_data['PrcItem'][i])))
+        ET.SubElement(detalle, "MontoItem").text = str(abs(int(detalles_data['MontoItem'][i])))
 
     # Sección Referencia
     referencia = ET.SubElement(documento, "Referencia")
