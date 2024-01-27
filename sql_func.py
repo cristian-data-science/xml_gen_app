@@ -89,7 +89,7 @@ def crear_xml(row):
     referencia = ET.SubElement(documento, "Referencia")
     ET.SubElement(referencia, "NroLinRef").text = str((int(((row['NroLinRef'])))))
     #ET.SubElement(referencia, "TpoDocRef").text = str((int(((row['TpoDocRef'])))))
-    ET.SubElement(referencia, "TpoDocRef").text = str(int(row['TpoDocRef']) if pd.notna(row['TpoDocRef']) and str(row['TpoDocRef']).isdigit() else 0)
+    ET.SubElement(referencia, "TpoDocRef").text = row['FolioRef'].split('-')[0] if '-' in row['FolioRef'] else row['FolioRef']
     ET.SubElement(referencia, "FolioRef").text = str(row['FolioRef'])
     ET.SubElement(referencia, "FchRef").text = str(row['FchRef'])
     ET.SubElement(referencia, "CodRef").text = str(row['CodRef'])
