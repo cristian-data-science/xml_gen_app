@@ -87,7 +87,7 @@ def crear_xml(row):
 
     # Sección Referencia
     referencia = ET.SubElement(documento, "Referencia")
-    ET.SubElement(referencia, "NroLinRef").text = str(abs(int(float((row['NroLinRef'])))))
+    ET.SubElement(referencia, "NroLinRef").text = str((int(((row['NroLinRef'])))))
     ET.SubElement(referencia, "TpoDocRef").text = str(row['TpoDocRef'])
     ET.SubElement(referencia, "FolioRef").text = str(row['FolioRef'])
     ET.SubElement(referencia, "FchRef").text = str(row['FchRef'])
