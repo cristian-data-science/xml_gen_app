@@ -25,8 +25,8 @@ def obtener_lineas_xml(fecha_desde, fecha_final):
     conn.close()
     return df_xml_invoice
 
-def truncate_text(text):
-    return str(text)[:40] 
+def truncate_text(text, max_length=40):
+    return str(text)[:max_length]
 
 def crear_xml(row):
     root = ET.Element("DTE")
