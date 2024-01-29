@@ -25,40 +25,43 @@ def obtener_lineas_xml(fecha_desde, fecha_final):
     conn.close()
     return df_xml_invoice
 
+def truncate_text(text):
+    return str(text)[:40] 
+
 def crear_xml(row):
     root = ET.Element("DTE")
     documento = ET.SubElement(root, "Documento")
     encabezado = ET.SubElement(documento, "Encabezado")
 
-    # Sección IdDoc
+# Sección IdDoc
     id_doc = ET.SubElement(encabezado, "IdDoc")
-    ET.SubElement(id_doc, "TipoDTE").text = str(row['TipoDTE'])
-    ET.SubElement(id_doc, "Folio").text = str(row['Folio'])
-    ET.SubElement(id_doc, "FchEmis").text = str(row['FchEmis'])
-    ET.SubElement(id_doc, "FmaPago").text = str(row['FmaPago'])
-    ET.SubElement(id_doc, "FchVenc").text = str(row['FchVenc'])
+    ET.SubElement(id_doc, "TipoDTE").text = truncate_text(row['TipoDTE'])
+    ET.SubElement(id_doc, "Folio").text = truncate_text(row['Folio'])
+    ET.SubElement(id_doc, "FchEmis").text = truncate_text(row['FchEmis'])
+    ET.SubElement(id_doc, "FmaPago").text = truncate_text(row['FmaPago'])
+    ET.SubElement(id_doc, "FchVenc").text = truncate_text(row['FchVenc'])
 
     # Sección Emisor
     emisor = ET.SubElement(encabezado, "Emisor")
-    ET.SubElement(emisor, "RUTEmisor").text = str(row['RUTEmisor'])
-    ET.SubElement(emisor, "RznSoc").text = str(row['RznSoc'])
-    ET.SubElement(emisor, "GiroEmis").text = str(row['GiroEmis'])
-    ET.SubElement(emisor, "Acteco").text = str(row['Acteco'])
-    ET.SubElement(emisor, "DirOrigen").text = str(row['DirOrigen'])
-    ET.SubElement(emisor, "CmnaOrigen").text = str(row['CmnaOrigen'])
-    ET.SubElement(emisor, "CiudadOrigen").text = str(row['CiudadOrigen'])
+    ET.SubElement(emisor, "RUTEmisor").text = truncate_text(row['RUTEmisor'])
+    ET.SubElement(emisor, "RznSoc").text = truncate_text(row['RznSoc'])
+    ET.SubElement(emisor, "GiroEmis").text = truncate_text(row['GiroEmis'])
+    ET.SubElement(emisor, "Acteco").text = truncate_text(row['Acteco'])
+    ET.SubElement(emisor, "DirOrigen").text = truncate_text(row['DirOrigen'])
+    ET.SubElement(emisor, "CmnaOrigen").text = truncate_text(row['CmnaOrigen'])
+    ET.SubElement(emisor, "CiudadOrigen").text = truncate_text(row['CiudadOrigen'])
 
     # Sección Receptor
     receptor = ET.SubElement(encabezado, "Receptor")
-    ET.SubElement(receptor, "RUTRecep").text = str(row['RUTRecep'])
-    ET.SubElement(receptor, "RznSocRecep").text = str(row['RznSocRecep'])
-    ET.SubElement(receptor, "GiroRecep").text = str(row['GiroRecep'])
-    ET.SubElement(receptor, "DirRecep").text = str(row['DirRecep'])
-    ET.SubElement(receptor, "CmnaRecep").text = str(row['CmnaRecep'])
-    ET.SubElement(receptor, "CiudadRecep").text = str(row['CiudadRecep'])
-    ET.SubElement(receptor, "CorreoRecep").text = str(row['CorreoRecep'])
-    ET.SubElement(receptor, "Contacto").text = str(row['Contacto'])
-    ET.SubElement(receptor, "CmnaPostal").text = str(row['CmnaPostal'])
+    ET.SubElement(receptor, "RUTRecep").text = truncate_text(row['RUTRecep'])
+    ET.SubElement(receptor, "RznSocRecep").text = truncate_text(row['RznSocRecep'])
+    ET.SubElement(receptor, "GiroRecep").text = truncate_text(row['GiroRecep'])
+    ET.SubElement(receptor, "DirRecep").text = truncate_text(row['DirRecep'])
+    ET.SubElement(receptor, "CmnaRecep").text = truncate_text(row['CmnaRecep'])
+    ET.SubElement(receptor, "CiudadRecep").text = truncate_text(row['CiudadRecep'])
+    ET.SubElement(receptor, "CorreoRecep").text = truncate_text(row['CorreoRecep'])
+    ET.SubElement(receptor, "Contacto").text = truncate_text(row['Contacto'])
+    ET.SubElement(receptor, "CmnaPostal").text = truncate_text(row['CmnaPostal'])
 
     # Sección Totales
     totales = ET.SubElement(encabezado, "Totales")
