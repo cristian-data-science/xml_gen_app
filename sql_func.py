@@ -99,10 +99,9 @@ def crear_xml(row):
     # Timestamp de firma (opcional)
     #ET.SubElement(documento, "TmstFirma").text = str(row['TmstFirma'])
 
-    dt_object = datetime.datetime.strptime(row['TmstFirma'], "%Y-%m-%d %H:%M:%S")
+  
+    formatted_time = row['TmstFirma'].isoformat()
 
-    # Format the datetime object to ISO 8601 format
-    formatted_time = dt_object.isoformat()
     # Create the XML element with the formatted time
     ET.SubElement(documento, "TmstFirma").text = formatted_time
 
