@@ -96,7 +96,7 @@ def crear_xml(row):
     ET.SubElement(referencia, "RazonRef").text = str(row['RazonRef'])
 
     # Timestamp de firma (opcional)
-    #ET.SubElement(documento, "TmstFirma").text = str(row['TmstFirma'])
+    ET.SubElement(documento, "TmstFirma").text = str(row['TmstFirma'])
 
     # Sección Personalizados (opcional)
     personalizados = ET.SubElement(documento, "Personalizados")
