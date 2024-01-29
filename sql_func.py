@@ -1,4 +1,5 @@
 import pymssql
+import datetime
 import os
 from dotenv import load_dotenv
 import pandas as pd
@@ -96,7 +97,14 @@ def crear_xml(row):
     ET.SubElement(referencia, "RazonRef").text = str(row['RazonRef'])
 
     # Timestamp de firma (opcional)
-    ET.SubElement(documento, "TmstFirma").text = str(row['TmstFirma'])
+    #ET.SubElement(documento, "TmstFirma").text = str(row['TmstFirma'])
+
+    dt_object = datetime.datetime.strptime(row['TmstFirma'], "%Y-%m-%d %H:%M:%S")
+
+    # Format the datetime object to ISO 8601 format
+    formatted_time = dt_object.isoformat()
+    # Create the XML element with the formatted time
+    ET.SubElement(documento, "TmstFirma").text = formatted_time
 
     # Sección Personalizados (opcional)
     personalizados = ET.SubElement(documento, "Personalizados")
