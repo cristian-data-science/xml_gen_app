@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+
 st.set_page_config(page_title="App Template", layout="wide", initial_sidebar_state="expanded")
 
 def load_lottieurl(url: str):
